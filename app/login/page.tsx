@@ -33,7 +33,7 @@ export default function Login() {
           </span>
         </div>
       </div>
-      <Button disable={!phoneNumber} onClick={() => alert("Clicked")}>
+      <Button disable={!phoneNumber} href="/auth">
         אישור
       </Button>
     </div>
