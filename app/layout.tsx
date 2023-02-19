@@ -1,9 +1,8 @@
 import "./globals.css";
 
-import { Inter } from "@next/font/google";
 import { Open_Sans } from "@next/font/google";
 
-const openSans = Inter({
+const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-open-sans"
@@ -22,7 +21,7 @@ export default function RootLayout({
       */}
       <head />
       <body className={openSans.variable}>
-        <main className="h-screen bg-white font-primary text-gray-dark font-normal sm:max-w-md mx-auto">
+        <main className="h-screen bg-white font-primary font-normal text-gray-dark sm:max-w-md mx-auto leading-4">
           {children}
         </main>
       </body>

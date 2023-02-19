@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import VerificationInput from "react-verification-input";
-import Button from "../components/shared/Button";
-import PageTitle from "../components/shared/PageTitle";
+import Button from "../components/Button";
+import PageTitle from "../components/PageTitle";
 
 export default function Approve() {
   const [value, setValue] = useState("");
@@ -34,7 +34,9 @@ export default function Approve() {
         </div>
       </div>
       <div className="flex flex-col w-full text-center mt-20">
-        <Button>אישור</Button>
+        <Button disable={!value || value.length !== 5} href="/welcome">
+          אישור
+        </Button>
         <a href="#" className="mt-2 underline">
           שלחו לי שוב את הקוד
         </a>
