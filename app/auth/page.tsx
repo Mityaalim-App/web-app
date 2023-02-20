@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import VerificationInput from "react-verification-input";
-import Button from "../components/shared/Button";
-import PageTitle from "../components/shared/PageTitle";
+import Button from "../components/Button";
+import PageTitle from "../components/PageTitle";
 
 export default function Approve() {
   const [value, setValue] = useState("");

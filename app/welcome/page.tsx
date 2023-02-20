@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Button from "../components/shared/Button";
-import PageTitle from "../components/shared/PageTitle";
+import Button from "../components/Button";
+import PageTitle from "../components/PageTitle";
 
 export default function Welcome() {
   return (
@@ -26,7 +26,7 @@ export default function Welcome() {
       </div>
 
       <div className="w-full mt-10">
-        <Button>המשך</Button>
+        <Button href="/personal-info">המשך</Button>
       </div>
     </div>
   );

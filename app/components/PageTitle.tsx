@@ -6,7 +6,7 @@ export interface IPageTitleProps {
 }
 export default function PageTitle({
   children,
-  className = ""
+  className = "text-2xl"
 }: IPageTitleProps) {
   return <h1 className={`font-bold text-center ${className}`}>{children}</h1>;
 }

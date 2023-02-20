@@ -2,14 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ReactElement } from "react";
+import { ButtonHTMLAttributes, ReactElement } from "react";
 
-export interface IButtonProps {
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactElement[] | ReactElement | string;
   disable?: boolean;
   outlined?: boolean;
   icon?: ReactElement | null;
   href?: string;
+  className?: string;
   onClick?: () => void;
 }
 export default function Button({
@@ -18,12 +19,14 @@ export default function Button({
   outlined = false,
   icon = null,
   href = undefined,
+  className = "",
   onClick = () => {}
 }: IButtonProps) {
   const IconComponent = () => icon;
   const buttonClasses = () => {
     const classes = [
-      "w-full rounded-full flex items-center justify-center py-2 px-4"
+      "w-full rounded-full flex items-center justify-center py-2 px-4",
+      className
     ];
     if (disable) {
       classes.push(
