@@ -20,9 +20,6 @@ module.exports = {
           light: "#D3EAD3",
           primary: "#22AA22"
         }
-      },
-      fontFamily: {
-        primary: ["var(--font-open-sans)"]
       }
     }
   },

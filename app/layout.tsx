@@ -20,8 +20,10 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className={openSans.variable}>
-        <main className="h-screen bg-white font-primary font-normal text-gray-dark sm:max-w-md mx-auto leading-4">
+      <body>
+        <main
+          className={`h-screen bg-white font-normal text-gray-dark sm:max-w-md mx-auto leading-4 ${openSans.className}`}
+        >
           {children}
         </main>
       </body>
