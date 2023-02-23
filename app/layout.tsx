@@ -1,15 +1,16 @@
 import "./globals.css";
 
 import { Open_Sans } from "@next/font/google";
+import NavBar from "./components/navbar/NavBar";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-open-sans"
+  variable: "--font-open-sans",
 });
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
@@ -24,6 +25,7 @@ export default function RootLayout({
         <main className="h-screen bg-white font-primary font-normal text-gray-dark sm:max-w-md mx-auto leading-4">
           {children}
         </main>
+        <NavBar />
       </body>
     </html>
   );

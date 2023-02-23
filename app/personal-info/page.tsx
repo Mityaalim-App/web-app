@@ -9,6 +9,7 @@ import AtSignIcon from "public/images/at-sign.svg";
 import BirthDateInput from "./BirthDateInput";
 import Pill from "./Pill";
 import Button from "../components/Button";
+import NavBar from "../components/navbar/NavBar";
 
 interface Props {}
 export default function PersonalInfo({}: Props) {
@@ -25,7 +26,7 @@ export default function PersonalInfo({}: Props) {
     "אלמן",
     "עם ילדים",
     "ללא ילדים",
-    "לא מעוניין לשתף"
+    "לא מעוניין לשתף",
   ];
 
   const onPillClicked = (status: string) => {
