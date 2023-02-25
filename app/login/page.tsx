@@ -19,7 +19,7 @@ export default function Login() {
       <div className="flex flex-col items-center px-8">
         <Image src="/images/leaves.svg" alt="Logo" width={200} height={190} />
         <PageTitle className="mt-14 text-2xl">איזה כיף שבאת</PageTitle>
-        <p className="text-center">
+        <p className="text-center mt-5 max-w-[250px] leading-7">
           כדי להתחבר יישלח לך קוד אימות חד-פעמי ב-SMS
         </p>
         <InputField

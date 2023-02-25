@@ -18,7 +18,8 @@ module.exports = {
         },
         green: {
           light: "#D3EAD3",
-          primary: "#22AA22"
+          primary: "#22AA22",
+          dark: "#134239"
         }
       },
       fontFamily: {

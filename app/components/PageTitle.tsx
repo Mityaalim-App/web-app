@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes as ReactHtmlAttributes, ReactElement } from "react";
+import { ReactElement } from "react";
 
 export interface IPageTitleProps {
   children: ReactElement[] | string;

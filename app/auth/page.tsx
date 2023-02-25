@@ -11,7 +11,7 @@ export default function Approve() {
       <div className="text-center">
         <PageTitle className="text-2xl">התחברות</PageTitle>
         <p className="mt-8">שלחנו קוד אימות ב-SMS למספר</p>
-        <p className="mt-2 font-bold">052-3554728</p>
+        <p className="mt-4 font-bold">052-3554728</p>
         <p className="mt-5">יש להזין אותו כעת:</p>
 
         <div dir="ltr" className="mt-2 h-20">
@@ -37,7 +37,7 @@ export default function Approve() {
         <Button disable={!value || value.length !== 5} href="/welcome">
           אישור
         </Button>
-        <a href="#" className="mt-2 underline">
+        <a href="#" className="mt-4 underline">
           שלחו לי שוב את הקוד
         </a>
       </div>
