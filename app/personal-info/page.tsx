@@ -9,6 +9,7 @@ import AtSignIcon from "public/images/at-sign.svg";
 import BirthDateInput from "./BirthDateInput";
 import Pill from "./Pill";
 import Button from "../components/Button";
+import ProgressBar from "./ProgressBar";
 
 interface Props {}
 export default function PersonalInfo({}: Props) {
@@ -39,11 +40,7 @@ export default function PersonalInfo({}: Props) {
   return (
     <div className="px-5 mt-10 flex flex-col items-center pb-10">
       <span className="text-gray-550 text-sm">1/3</span>
-      <div className="progress bg-green-light flex h-1 rounded-full overflow-hidden mb-5 w-full">
-        <span className="flex-1 rounded-l-full bg-green-primary"></span>
-        <span className="flex-1 "></span>
-        <span className="flex-1 rounded-full"></span>
-      </div>
+      <ProgressBar step={1} />
       <PageTitle>נשמח להכיר</PageTitle>
       <form action="" className="w-full flex flex-col gap-2">
         <InputField
