@@ -28,7 +28,7 @@ export default function ScoreDisplay({
         <p className="pr-4">{score}</p>
       </div>
       <Image
-        className="fixed left-2 "
+        className="absolute left-0 -translate-x-[20%] "
         src={`/images/${src}`}
         alt=""
         height={26}
