@@ -4,7 +4,11 @@ import Image from "next/image";
 import Button from "../components/Button";
 import PageTitle from "../components/PageTitle";
 import CellIcon from "public/images/cellphone.svg";
-import { ChangeEvent as ReactChangeEvent, useState } from "react";
+import {
+  ChangeEvent as ReactChangeEvent,
+  useState,
+  MouseEvent as ReactMouseEvent
+} from "react";
 import InputField from "../components/InputField";
 
 export default function Login() {
@@ -12,6 +16,15 @@ export default function Login() {
 
   const handleOnChange = (e: ReactChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(e.target.value);
+  };
+
+  const handleLogin = async (e: ReactMouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const resp = await fetch("/api/auth", {
+      method: "POST",
+      body: JSON.stringify({ phone: phoneNumber })
+    });
+    console.log(resp);
   };
 
   return (
@@ -29,7 +42,7 @@ export default function Login() {
           onChange={handleOnChange}
         />
       </div>
-      <Button disable={!phoneNumber} href="/auth">
+      <Button disable={!phoneNumber} onClick={handleLogin}>
         אישור
       </Button>
     </div>

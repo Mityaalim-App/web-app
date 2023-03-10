@@ -2,7 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ButtonHTMLAttributes, ReactElement } from "react";
+import {
+  ButtonHTMLAttributes,
+  MouseEvent as ReactMouseEvent,
+  ReactElement
+} from "react";
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactElement[] | ReactElement | string;
@@ -11,7 +15,7 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ReactElement | null;
   href?: string;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: ReactMouseEvent<HTMLButtonElement>) => void;
 }
 export default function Button({
   children,
@@ -20,7 +24,7 @@ export default function Button({
   icon = null,
   href = undefined,
   className = "",
-  onClick = () => {}
+  onClick = (e: ReactMouseEvent<HTMLButtonElement>) => {}
 }: IButtonProps) {
   const IconComponent = () => icon;
   const buttonClasses = () => {
