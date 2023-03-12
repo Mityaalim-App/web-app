@@ -1,30 +1,25 @@
+import Image from "next/image";
 import LeafIcon from "public/images/leaf-icon.svg";
-import GreenLeafIcon from "public/images/leaf-icon-green.svg";
-import CoinIcon from "public/images/coin-icon.svg";
+import { ReactElement } from "react";
 
 export interface IScoreDisplayProps {
   score: number;
-  isBold: boolean;
-  isLeaf: boolean;
+  style: string | null;
+  icon?: ReactElement | null;
 }
 
 export default function ScoreDisplay({
   score,
-  isBold,
-  isLeaf,
+  style = null,
+  icon = null,
 }: IScoreDisplayProps) {
+  const IconComponent = () => icon;
   return (
-    <div className="flex items-center gap-x-1">
-      {isBold ? <p className="font-bold">{score}</p> : <p>{score}</p>}
-      {isLeaf ? (
-        isBold ? (
-          <GreenLeafIcon className="h-4 w-4" />
-        ) : (
-          <LeafIcon className="h-6 w-6" />
-        )
-      ) : (
-        <CoinIcon className="h-4 w-4" />
-      )}
+    <div className={`flex items-center gap-x-1 text-base ${style}`}>
+      <span>{score}</span>
+      <span className="w-6 h-6 ml-1">
+        {icon === null ? <LeafIcon /> : <IconComponent />}
+      </span>
     </div>
   );
 }
