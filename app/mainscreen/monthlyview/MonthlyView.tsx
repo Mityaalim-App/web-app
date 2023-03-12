@@ -10,8 +10,16 @@ export default function MonthlyView() {
         <ViewTitle score={300} title="חודש יוני" />
         <div className=" flex flex-col gap-y-3">
           <div className="flex justify-between">
-            <ExpenseIncomeTitle title="הוצאות" amount={3000} isIncome={false} />
-            <ExpenseIncomeTitle title="מתוך" amount={10000} isIncome={true} />
+            <ExpenseIncomeTitle
+              title="הוצאות"
+              amount={3000}
+              style="text-orange-expense"
+            />
+            <ExpenseIncomeTitle
+              title="מתוך"
+              amount={10000}
+              style="text-green-primary"
+            />
           </div>
           <ProgressBar income={10000} expense={3000} dest={2000} />
         </div>
@@ -24,14 +32,16 @@ export default function MonthlyView() {
           </span>
         </div>
       </main>
-
       <div className="mt-2 flex flex-col gap-y-1">
-        <p className="text-green-middle px-3">נותר לך להוצאות :</p>
+        <p className="text-green-middle">נותר לך להוצאות :</p>
         <div className="bg-green-progressBarIncome flex justify-between p-3 rounded-b-xl">
-          <span className="flex items-end text-3xl text-white">
-            <p className="text-5xl font-bold ">{10000 - 3000 - 2000}</p>₪
-          </span>
-          <Button className=" w-36">לאן הולך הכסף?</Button>
+          <div className="flex items-end  text-white text-5xl font-bold ">
+            <span>{10000 - 3000 - 2000}</span>
+            <span className="font-normal text-3xl">₪</span>
+          </div>
+          <Button className=" max-content mr-16 text-sm font-bold ">
+            לאן הולך הכסף?
+          </Button>
         </div>
       </div>
     </section>

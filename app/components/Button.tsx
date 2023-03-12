@@ -4,7 +4,7 @@ import Link from "next/link";
 import {
   ButtonHTMLAttributes,
   MouseEvent as ReactMouseEvent,
-  ReactElement
+  ReactElement,
 } from "react";
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -23,13 +23,13 @@ export default function Button({
   icon = null,
   href = undefined,
   className = "",
-  onClick = (e: any) => {}
+  onClick = (e: any) => {},
 }: IButtonProps) {
   const IconComponent = () => icon;
   const buttonClasses = () => {
     const classes = [
       "w-full rounded-full flex items-center justify-center py-2 px-4",
-      className
+      className,
     ];
     if (disable) {
       classes.push(
@@ -62,7 +62,12 @@ export default function Button({
     </Link>
   ) : (
     <button className={buttonClasses()} onClick={onClick} disabled={disable}>
-      <span className="w-6 h-6 ml-1">{icon && <IconComponent />}</span>
+      {icon && (
+        <span className="w-6 h-6 ml-1">
+          {" "}
+          <IconComponent />
+        </span>
+      )}
       <span>{children}</span>
     </button>
   );
