@@ -1,10 +1,26 @@
 "use client";
+import { IStoreState, useMainStore } from "@/store";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import VerificationInput from "react-verification-input";
 import Button from "../components/Button";
 import PageTitle from "../components/PageTitle";
 
 export default function Approve() {
+  const phoneNumber = useMainStore((state: IStoreState) => state.phoneNumber);
+
+  const handleResend = async () => {
+    const resp = await fetch("/api/sms", {
+      method: "POST",
+      body: JSON.stringify({ phone: phoneNumber })
+    });
+
+    if (!resp.ok) {
+      const body = await resp.json();
+      toast.error(body.error);
+    }
+  };
+
   const [value, setValue] = useState("");
   return (
     <div className="h-full flex flex-col justify-center items-center px-5 w-full text-gray-400">
@@ -42,6 +58,7 @@ export default function Approve() {
           className={`mt-4 underline ${
             !value ? "text-green-300" : "text-gray-200"
           }`}
+          onClick={handleResend}
         >
           שלחו לי שוב את הקוד
         </a>

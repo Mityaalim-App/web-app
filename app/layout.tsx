@@ -1,6 +1,9 @@
+"use client";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.min.css";
 
 import { Open_Sans } from "@next/font/google";
+import { ToastrWrapper } from "./components/ToastrWrapper";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -20,7 +23,8 @@ export default function RootLayout({
       */}
       <head />
       <body className={openSans.className}>
-        <main className="h-screen bg-white font-normal text-black sm:max-w-md mx-auto leading-4">
+        <ToastrWrapper />
+        <main className="h-screen bg-white font-normal text-gray-dark sm:max-w-md mx-auto leading-4">
           {children}
         </main>
       </body>
