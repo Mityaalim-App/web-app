@@ -54,7 +54,7 @@ export default function BirthDateInput({ onChange }: Props) {
   };
 
   return (
-    <div className="flex items-center p-4 border border-gray-650  w-full rounded-[4px]">
+    <div className="flex items-center p-4 border border-gray-400  w-full rounded-[4px]">
       <input
         value={year}
         type="text"

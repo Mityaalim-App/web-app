@@ -4,14 +4,33 @@ import Image from "next/image";
 import Button from "../components/Button";
 import PageTitle from "../components/PageTitle";
 import CellIcon from "public/images/cellphone.svg";
-import { ChangeEvent as ReactChangeEvent, useState } from "react";
+import {
+  ChangeEvent as ReactChangeEvent,
+  useState,
+  MouseEvent as ReactMouseEvent
+} from "react";
 import InputField from "../components/InputField";
 
 export default function Login() {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleOnChange = (e: ReactChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(e.target.value);
+    if (e.target.value.length <= 10) setPhoneNumber(e.target.value);
+  };
+
+  const handleLogin = async (e: ReactMouseEvent<HTMLButtonElement>) => {
+    // e.preventDefault();
+    // const resp = await fetch("/api/auth", {
+    //   method: "POST",
+    //   body: JSON.stringify({ phone: phoneNumber })
+    // });
+  };
+
+  const isPhoneValid = () => {
+    //accepts only cellular numbers
+    const regex =
+      /^(?:0(5)(?:0|1|2|3|4|5|6|7|8|9))(?:-?\d){7}$|^(0(?=5)(?:-?\d){9})$/;
+    return regex.test(phoneNumber);
   };
 
   return (
@@ -19,7 +38,7 @@ export default function Login() {
       <div className="flex flex-col items-center px-8">
         <Image src="/images/leaves.svg" alt="Logo" width={200} height={190} />
         <PageTitle className="mt-14 text-2xl">איזה כיף שבאת</PageTitle>
-        <p className="text-center mt-5 max-w-[250px] leading-7">
+        <p className="text-center mt-5 max-w-[250px] leading-7 text-gray-400">
           כדי להתחבר יישלח לך קוד אימות חד-פעמי ב-SMS
         </p>
         <InputField
@@ -29,7 +48,7 @@ export default function Login() {
           onChange={handleOnChange}
         />
       </div>
-      <Button disable={!phoneNumber} href="/auth">
+      <Button disable={!isPhoneValid()} href="/auth">
         אישור
       </Button>
     </div>

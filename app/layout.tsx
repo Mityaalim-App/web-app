@@ -20,7 +20,7 @@ export default function RootLayout({
       */}
       <head />
       <body className={openSans.className}>
-        <main className="h-screen bg-white font-normal text-gray-dark sm:max-w-md mx-auto leading-4">
+        <main className="h-screen bg-white font-normal text-black sm:max-w-md mx-auto leading-4">
           {children}
         </main>
       </body>

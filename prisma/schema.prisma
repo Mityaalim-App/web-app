@@ -15,5 +15,7 @@ model User {
   email String @unique
   name String
   phoneNumber String
+  tempCode Decimal
+  isVerified Boolean
   createdAt DateTime @default(now())
 }

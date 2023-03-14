@@ -39,7 +39,7 @@ export default function PersonalInfo({}: Props) {
 
   return (
     <div className="px-5 mt-10 flex flex-col items-center pb-10">
-      <span className="text-gray-550 text-sm">1/3</span>
+      <span className="text-gray-300 text-sm">1/3</span>
       <ProgressBar step={1} />
       <PageTitle>נשמח להכיר</PageTitle>
       <form action="" className="w-full flex flex-col gap-2">
@@ -68,7 +68,7 @@ export default function PersonalInfo({}: Props) {
 
         <PageTitle className="text-right my-4">תאריך לידה</PageTitle>
         <div className="date-wrapper">
-          <div className="flex text-gray-550 font-normal">
+          <div className="flex text-gray-300 font-normal">
             <span className="flex-1 text-center"> שנה </span>
             <span className="flex-1 text-center"> חודש </span>
             <span className="flex-1 text-center"> יום </span>
@@ -77,7 +77,7 @@ export default function PersonalInfo({}: Props) {
         </div>
 
         <PageTitle className="text-right mt-4">סטטוס משפחתי</PageTitle>
-        <p className="text-gray-550 mt-1">סמנו את כל האופציות המתאימות</p>
+        <p className="text-gray-400 mt-1">סמנו את כל האופציות המתאימות</p>
         <div className="flex flex-wrap gap-2 justify-center mt-4">
           {statuses.map((item) => (
             <Pill

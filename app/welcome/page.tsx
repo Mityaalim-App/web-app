@@ -19,9 +19,9 @@ export default function Welcome() {
           alt="illustration"
           className="mt-5 relative z-10"
         />
-        <div className="bg-green-light flex flex-col items-center justify-center w-full min-h-[200px] h-[30vh] -mt-10 rounded-3xl text-green-dark">
+        <div className="bg-green-100 flex flex-col items-center justify-center w-full min-h-[200px] h-[30vh] -mt-10 rounded-3xl">
           <PageTitle className="text-2xl">איזה כיף שהצטרפת אלינו!</PageTitle>
-          <p className="mt-1">ביחד נצליח להתייעל כלכלית </p>
+          <p className="mt-1 text-gray-400">ביחד נצליח להתייעל כלכלית </p>
         </div>
       </div>
 
