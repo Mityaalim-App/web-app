@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import {
   ButtonHTMLAttributes,
@@ -15,7 +14,7 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ReactElement | null;
   href?: string;
   className?: string;
-  onClick?: (e: ReactMouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: any) => void;
 }
 export default function Button({
   children,
@@ -24,7 +23,7 @@ export default function Button({
   icon = null,
   href = undefined,
   className = "",
-  onClick = (e: ReactMouseEvent<HTMLButtonElement>) => {}
+  onClick = (e: any) => {}
 }: IButtonProps) {
   const IconComponent = () => icon;
   const buttonClasses = () => {
@@ -48,8 +47,16 @@ export default function Button({
     return classes.join(" ");
   };
 
+  const handleOnclick = (e: any) => {
+    if (disable) {
+      e.preventDefault();
+    } else {
+      onClick(e);
+    }
+  };
+
   return href ? (
-    <Link href={href} className={buttonClasses()}>
+    <Link href={href} className={buttonClasses()} onClick={handleOnclick}>
       <span className="w-6 h-6 ml-1">{icon && <IconComponent />}</span>
       <span>{children}</span>
     </Link>

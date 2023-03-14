@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Button from "../components/Button";
 import PageTitle from "../components/PageTitle";
@@ -10,20 +11,40 @@ import {
   MouseEvent as ReactMouseEvent
 } from "react";
 import InputField from "../components/InputField";
+import { IStoreState, useMainStore } from "@/store";
+import { toast } from "react-toastify";
 
 export default function Login() {
+  const router = useRouter();
+  const setPhoneInStore = useMainStore((state: IStoreState) => state.setPhone);
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleOnChange = (e: ReactChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length <= 10) setPhoneNumber(e.target.value);
+    if (e.target.value.length <= 10)
+      setPhoneNumber(() => {
+        return e.target.value;
+      });
   };
 
   const handleLogin = async (e: ReactMouseEvent<HTMLButtonElement>) => {
-    // e.preventDefault();
-    // const resp = await fetch("/api/auth", {
-    //   method: "POST",
-    //   body: JSON.stringify({ phone: phoneNumber })
-    // });
+    e.preventDefault();
+    const resp = await fetch("/api/auth", {
+      method: "POST",
+      body: JSON.stringify({ phone: phoneNumber })
+    });
+
+    if (!resp.ok) {
+      const body = await resp.json();
+      toast.error(body.error);
+      return;
+    }
+
+    if (resp.redirected) {
+      sessionStorage.setItem("redirect", resp.url);
+    }
+
+    setPhoneInStore(phoneNumber);
+    router.replace("/auth");
   };
 
   const isPhoneValid = () => {
@@ -48,7 +69,7 @@ export default function Login() {
           onChange={handleOnChange}
         />
       </div>
-      <Button disable={!isPhoneValid()} href="/auth">
+      <Button disable={!isPhoneValid()} onClick={handleLogin}>
         אישור
       </Button>
     </div>
