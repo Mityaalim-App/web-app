@@ -7,14 +7,14 @@ import PageTitle from "../components/PageTitle";
 export default function Approve() {
   const [value, setValue] = useState("");
   return (
-    <div className="h-full flex flex-col justify-center items-center px-5 w-full">
+    <div className="h-full flex flex-col justify-center items-center px-5 w-full text-gray-400">
       <div className="text-center">
-        <PageTitle className="text-2xl">התחברות</PageTitle>
+        <PageTitle className="text-2xl text-black">התחברות</PageTitle>
         <p className="mt-8">שלחנו קוד אימות ב-SMS למספר</p>
-        <p className="mt-4 font-bold">052-3554728</p>
+        <p className="mt-4 text-black">052-3554728</p>
         <p className="mt-5">יש להזין אותו כעת:</p>
 
-        <div dir="ltr" className="mt-2 h-20">
+        <div dir="ltr" className="mt-3 h-20">
           <VerificationInput
             value={value}
             autoFocus
@@ -25,9 +25,9 @@ export default function Approve() {
             classNames={{
               container: "container",
               character:
-                "rounded-full w-12 h-20 border border-green-light flex items-center justify-center",
+                "rounded-full w-12 h-20 border border-green-100 flex items-center justify-center text-black",
               characterInactive: "bg-white",
-              characterSelected: "bg-green-light"
+              characterSelected: "outline-none border-green-300"
             }}
             onChange={(newVal) => setValue(newVal)}
           />
@@ -37,7 +37,12 @@ export default function Approve() {
         <Button disable={!value || value.length !== 5} href="/welcome">
           אישור
         </Button>
-        <a href="#" className="mt-4 underline">
+        <a
+          href="#"
+          className={`mt-4 underline ${
+            !value ? "text-green-300" : "text-gray-200"
+          }`}
+        >
           שלחו לי שוב את הקוד
         </a>
       </div>

@@ -2,25 +2,25 @@ import { ReactElement } from "react";
 
 interface Props {
   children: string;
-  outlined?: boolean;
   active?: boolean;
   onClick: (item: string) => void;
 }
-function Pill({ children, onClick, outlined = false, active = false }: Props) {
-  const activeClasses = "bg-green-primary text-white border-green-light";
+function Pill({ children, onClick, active = false }: Props) {
+  const activeClasses = "bg-green-200 text-white border-green-300";
+  const notActiveClasses = "bg-gray-100 border-gray-400 text-gray-400";
+
+  const getClasses = () => {
+    const classes = ["border  rounded-full py-1 px-4 w-max cursor-pointer"];
+    if (active) {
+      classes.push(activeClasses);
+    } else {
+      classes.push(notActiveClasses);
+    }
+
+    return classes.join(" ");
+  };
   return (
-    <div
-      className={`${
-        outlined
-          ? active
-            ? activeClasses
-            : "bg-white border-gray-dark"
-          : active
-          ? activeClasses
-          : "bg-gray-100 border-gray-dark"
-      } border  rounded-full py-1 px-4 w-max cursor-pointer`}
-      onClick={() => onClick(children)}
-    >
+    <div className={getClasses()} onClick={() => onClick(children)}>
       {children}
     </div>
   );

@@ -35,14 +35,14 @@ export default function Button({
     if (disable) {
       classes.push(
         outlined
-          ? "border border-green-light text-green-light"
-          : "bg-green-light text-white"
+          ? "border border-green-100 text-green-100"
+          : "bg-green-100 text-white"
       );
     } else {
       classes.push(
         outlined
-          ? "border border-green-primary text-green-primary"
-          : "bg-green-primary text-white"
+          ? "border border-green-300 text-green-300"
+          : "bg-green-300 text-white"
       );
     }
     return classes.join(" ");

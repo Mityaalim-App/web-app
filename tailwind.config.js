@@ -9,18 +9,26 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        black: "#041204",
         gray: {
-          100: "#F9F9F9",
-          250: "#C7D2D0",
-          550: "#9F9F9F",
-          650: "#79747E",
-          dark: "#3C3C3C"
+          100: "#F2F2F2",
+          200: "#dedede",
+          300: "#AAB2AA",
+          400: "#868886"
         },
         green: {
-          light: "#D3EAD3",
-          primary: "#22AA22",
-          dark: "#134239"
-        }
+          100: "#D3EAD3",
+          200: "#93D193",
+          300: "#22AA22",
+          400: "#086008"
+        },
+        orange: {
+          primary: "#EC7B29"
+        },
+        info: "#0CB3E8",
+        success: "#0CE871",
+        warning: "#E8DF0C",
+        error: "#E80C0C"
       },
       fontFamily: {
         primary: ["var(--font-open-sans)"]
