@@ -25,7 +25,9 @@ export default function HeroComp() {
         <span className=" w-52 text-xl leading-8 px-4 py-5">
           <span className="text-3xl">{user.name} </span>
           מתחילת ההתייעלות חסכתם{" "}
-          <span className="text-black text-2xl">₪{user.saved}</span>
+          <span className="text-black text-2xl">
+            ₪{user.saved.toLocaleString()}
+          </span>
         </span>
         <CloudIcon className="absolute top-5 h-5 w-20 right-36  -scale-x-100 " />
         <CloudIcon className="absolute top-16 h-5 w-16 right-36" />
