@@ -11,9 +11,11 @@ import Pill, { IPillChildren } from "./Pill";
 import Button from "../components/Button";
 import ProgressBar from "./ProgressBar";
 import { MarriageStatus, KidsStatus } from "@prisma/client";
+import { kidsStatuses, marriageStatuses } from "./personaInfo.consts";
+import { useRouter } from "next/navigation";
 
-interface Props {}
-export default function PersonalInfo({}: Props) {
+export default function PersonalInfo() {
+  const router = useRouter();
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -21,31 +23,6 @@ export default function PersonalInfo({}: Props) {
   const [selectedMarriageStatus, setSelectedMarriageStatus] =
     useState<string>("");
   const [selectedKidsStatus, setSelectedKidsStatus] = useState<string>("");
-
-  const marriageStatuses = [
-    {
-      label: "רווק",
-      value: MarriageStatus.SINGLE
-    },
-    {
-      label: "נשוי",
-      value: MarriageStatus.MARRIED
-    },
-    {
-      label: "גרוש",
-      value: MarriageStatus.DIVORCED
-    },
-    {
-      label: "אלמן",
-      value: MarriageStatus.WIDOW
-    }
-  ];
-
-  const kidsStatuses = [
-    { label: "עם ילדים", value: KidsStatus.HAVE_KIDS },
-    { label: "ללא ילדים", value: KidsStatus.NO_KIDS },
-    { label: "לא מעוניין לשתף", value: KidsStatus.NA }
-  ];
 
   const onPillClicked = (status: IPillChildren, isKidsStatus: boolean) => {
     if (isKidsStatus) {
@@ -55,9 +32,13 @@ export default function PersonalInfo({}: Props) {
     }
   };
 
+  const handleSave = (e: any) => {
+    e.preventDefault();
+    router.push("/saving-goal");
+  };
+
   return (
     <div className="px-5 mt-10 flex flex-col items-center pb-10">
-      <span className="text-gray-300 text-sm">1/3</span>
       <ProgressBar step={1} />
       <PageTitle>נשמח להכיר</PageTitle>
       <form action="" className="w-full flex flex-col gap-2">
@@ -118,7 +99,9 @@ export default function PersonalInfo({}: Props) {
             </Pill>
           ))}
         </div>
-        <Button className="mt-10">המשך</Button>
+        <Button className="mt-10" onClick={handleSave}>
+          המשך
+        </Button>
       </form>
     </div>
   );
