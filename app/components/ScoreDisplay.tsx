@@ -16,7 +16,7 @@ export default function ScoreDisplay({
   const IconComponent = () => icon;
   return (
     <div className={`flex items-center gap-x-1 text-base ${style}`}>
-      <span>{score}</span>
+      <span>{score.toLocaleString()}</span>
       <span className="w-6 h-6 ml-1">
         {icon === null ? <LeafIcon /> : <IconComponent />}
       </span>
