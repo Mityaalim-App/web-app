@@ -18,7 +18,7 @@ export async function sendSms(tempCode: number, phone: string) {
     headers,
     body: JSON.stringify({
       Data: {
-        Message: `קוד האימות שלך הוא ${tempCode}`,
+        Message: `קוד האימות שנשלח אליך מאפליקציית מתייעלים הוא ${tempCode} \nקוד זה הוא חד פעמי ותקף ל-5 דקות בלבד.`,
         Recipients: [
           {
             Phone: phone
