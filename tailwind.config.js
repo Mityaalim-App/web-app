@@ -33,6 +33,9 @@ module.exports = {
       fontFamily: {
         primary: ["var(--font-open-sans)"],
       },
+      boxShadow: {
+        main: " 0px 4px 24px rgba(0, 0, 0, 0.08)",
+      },
     },
   },
   plugins: [],

@@ -20,12 +20,12 @@ export default function HeroComp() {
 
   return (
     <section className="flex flex-col pt-8 relative overflow-x-hidden h-52 px-4 gap-y-1">
-      <span className="text-green-primary">{currDate}</span>
-      <div className=" h-36 flex items-center text-white bg-gradient-to-b from-green-progressBarIncome to-green-light shadow-main font-bold rounded-xl relative">
+      <span className="text-green-300">{currDate}</span>
+      <div className=" h-36 flex items-center text-white bg-gradient-to-b from-green-200 to-green-100 shadow-main font-bold rounded-xl relative">
         <span className=" w-52 text-xl leading-8 px-4 py-5">
           <span className="text-3xl">{user.name} </span>
           מתחילת ההתייעלות חסכתם{" "}
-          <span className="text-gray-dark text-2xl">₪{user.saved}</span>
+          <span className="text-black text-2xl">₪{user.saved}</span>
         </span>
         <CloudIcon className="absolute top-5 h-5 w-20 right-36  -scale-x-100 " />
         <CloudIcon className="absolute top-16 h-5 w-16 right-36" />
