@@ -23,6 +23,8 @@ model UserDetails {
   id                 Int      @id @default(autoincrement())
   name               String
   email              String
+  marriageStatus     MarriageStatus
+  kidsStatus         KidsStatus
   monthlySavings     Int?
   weeklyAlertDays    Days[]
   weeklyAlertHour    Int?
@@ -40,4 +42,17 @@ enum Days {
   THURSDAY
   FRIDAY
   SATURDAY
+}
+
+enum KidsStatus {
+  HAVE_KIDS
+  NO_KIDS
+  NA
+}
+
+enum MarriageStatus {
+  SINGLE
+  MARRIED
+  DIVORCED
+  WIDOW
 }

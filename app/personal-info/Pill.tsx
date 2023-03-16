@@ -1,9 +1,15 @@
-import { ReactElement } from "react";
+"use client";
 
+import { KidsStatus, MarriageStatus } from "@prisma/client";
+
+export interface IPillChildren {
+  label: string;
+  value: any;
+}
 interface Props {
-  children: string;
+  children: IPillChildren;
   active?: boolean;
-  onClick: (item: string) => void;
+  onClick: (item: IPillChildren) => void;
 }
 function Pill({ children, onClick, active = false }: Props) {
   const activeClasses = "bg-green-200 text-white border-green-300";
@@ -21,7 +27,7 @@ function Pill({ children, onClick, active = false }: Props) {
   };
   return (
     <div className={getClasses()} onClick={() => onClick(children)}>
-      {children}
+      {children.label}
     </div>
   );
 }

@@ -7,9 +7,10 @@ import UserIcon from "public/images/user.svg";
 import FamilyIcon from "public/images/family.svg";
 import AtSignIcon from "public/images/at-sign.svg";
 import BirthDateInput from "./BirthDateInput";
-import Pill from "./Pill";
+import Pill, { IPillChildren } from "./Pill";
 import Button from "../components/Button";
 import ProgressBar from "./ProgressBar";
+import { MarriageStatus, KidsStatus } from "@prisma/client";
 
 interface Props {}
 export default function PersonalInfo({}: Props) {
@@ -17,23 +18,40 @@ export default function PersonalInfo({}: Props) {
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [dob, setDob] = useState<string>("");
-  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
+  const [selectedMarriageStatus, setSelectedMarriageStatus] =
+    useState<string>("");
+  const [selectedKidsStatus, setSelectedKidsStatus] = useState<string>("");
 
-  const statuses = [
-    "רווק",
-    "נשוי",
-    "גרוש",
-    "אלמן",
-    "עם ילדים",
-    "ללא ילדים",
-    "לא מעוניין לשתף"
+  const marriageStatuses = [
+    {
+      label: "רווק",
+      value: MarriageStatus.SINGLE
+    },
+    {
+      label: "נשוי",
+      value: MarriageStatus.MARRIED
+    },
+    {
+      label: "גרוש",
+      value: MarriageStatus.DIVORCED
+    },
+    {
+      label: "אלמן",
+      value: MarriageStatus.WIDOW
+    }
   ];
 
-  const onPillClicked = (status: string) => {
-    if (selectedStatuses.includes(status)) {
-      setSelectedStatuses((prev) => prev.filter((stat) => stat !== status));
+  const kidsStatuses = [
+    { label: "עם ילדים", value: KidsStatus.HAVE_KIDS },
+    { label: "ללא ילדים", value: KidsStatus.NO_KIDS },
+    { label: "לא מעוניין לשתף", value: KidsStatus.NA }
+  ];
+
+  const onPillClicked = (status: IPillChildren, isKidsStatus: boolean) => {
+    if (isKidsStatus) {
+      setSelectedKidsStatus(status.value);
     } else {
-      setSelectedStatuses((prev) => [...prev, status]);
+      setSelectedMarriageStatus(status.value);
     }
   };
 
@@ -68,7 +86,7 @@ export default function PersonalInfo({}: Props) {
 
         <PageTitle className="text-right my-4">תאריך לידה</PageTitle>
         <div className="date-wrapper">
-          <div className="flex text-gray-300 font-normal">
+          <div className="flex text-gray-400 font-normal mb-1">
             <span className="flex-1 text-center"> שנה </span>
             <span className="flex-1 text-center"> חודש </span>
             <span className="flex-1 text-center"> יום </span>
@@ -79,11 +97,22 @@ export default function PersonalInfo({}: Props) {
         <PageTitle className="text-right mt-4">סטטוס משפחתי</PageTitle>
         <p className="text-gray-400 mt-1">סמנו את כל האופציות המתאימות</p>
         <div className="flex flex-wrap gap-2 justify-center mt-4">
-          {statuses.map((item) => (
+          {marriageStatuses.map((item) => (
             <Pill
-              key={item}
-              onClick={onPillClicked}
-              active={selectedStatuses.includes(item)}
+              key={item.value}
+              onClick={(status) => onPillClicked(status, false)}
+              active={selectedMarriageStatus === item.value}
+            >
+              {item}
+            </Pill>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2 justify-center mt-4">
+          {kidsStatuses.map((item) => (
+            <Pill
+              key={item.value}
+              onClick={(status) => onPillClicked(status, true)}
+              active={selectedKidsStatus === item.value}
             >
               {item}
             </Pill>
