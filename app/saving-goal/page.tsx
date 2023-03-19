@@ -7,7 +7,7 @@ import NisIcon from "../../public/images/nis.svg";
 import Button from "../components/Button";
 import { ChangeEvent, useState } from "react";
 
-function SavingGoal() {
+export default function SavingGoal() {
   const [goal, setGoal] = useState<number>();
 
   const handleGoalChanged = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,8 +40,9 @@ function SavingGoal() {
         onChange={handleGoalChanged}
       />
 
-      <Button className="mt-16">המשך</Button>
+      <Button className="mt-16" href="/notification">
+        המשך
+      </Button>
     </div>
   );
 }
-export default SavingGoal;

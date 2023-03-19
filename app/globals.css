@@ -5,3 +5,12 @@
 .font-open-sans {
   font-family: "Open Sans", sans-serif;
 }
+
+.react-datepicker--time-only,
+.react-datepicker__time-container {
+  @apply w-full;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
