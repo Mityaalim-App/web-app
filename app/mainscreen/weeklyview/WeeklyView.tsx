@@ -30,7 +30,7 @@ export default function WeeklyView() {
     {
       title: "מאמר",
       icon: <OpenBookIcon />,
-      isCompleted: true,
+      isCompleted: false,
     },
   ];
   const [isTasksCompleted, setIsTasksCompleted] = useState(true);
@@ -47,7 +47,7 @@ export default function WeeklyView() {
       <ViewTitle
         title="משימות השבוע"
         score={250}
-        style={isTasksCompleted ? "text-green-primary" : ""}
+        style={isTasksCompleted ? "text-green-300" : "text-gray-300"}
       />
       <WeeklyLetters />
       <main className="flex flex-col gap-4">
@@ -60,11 +60,11 @@ export default function WeeklyView() {
                 isCompleted={isCompleted}
                 key={index}
                 score={25}
-                style={isCompleted ? "text-gray-250" : "text-gray-dark"}
+                style={isCompleted ? "text-gray-300" : "text-gray-300"}
               />
             ))}
           {isTasksCompleted && (
-            <span className="border-green-light border-2 rounded-lg">
+            <span className="border-green-200 border-2 rounded-lg">
               <WeeklyTask
                 title={"סיימת את משימות השבוע"}
                 icon={<TrophyIcon />}

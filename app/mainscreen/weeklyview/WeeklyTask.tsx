@@ -22,7 +22,7 @@ export default function WeeklyTask({
 }: IWeeklyLetterProps) {
   const IconComponent = () => icon;
   return (
-    <section className="flex justify-between items-center shadow-main rounded-lg h-16 text-xl">
+    <section className="flex justify-between items-center shadow-main rounded-lg h-20 text-xl">
       <div className={`flex items-center justify-center gap-x-4 ${style}`}>
         <span
           className=" h-14 w-14"
@@ -37,7 +37,7 @@ export default function WeeklyTask({
       <div className="flex gap-x-1 pl-2">
         <ScoreDisplay
           score={score}
-          style={isCompleted ? "text-green-primary" : "text-gray-550"}
+          style={isCompleted ? "text-green-300" : "text-gray-300"}
         />
         {!isTrophy &&
           (isCompleted ? (

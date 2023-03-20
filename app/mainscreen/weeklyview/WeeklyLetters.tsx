@@ -9,9 +9,9 @@ export default function WeeklyLetters() {
   ///tried useEffect and ref but it needed a refresh to update the letters
   const dynamicClassNameGetter = (index: number) => {
     if (currDay === index)
-      return "text-white bg-green-primary rounded-full font-bold";
-    else if (currDay > index) return "text-gray-250";
-    else return "text-green-primary font-bold";
+      return "text-white bg-green-300 rounded-full font-bold";
+    else if (currDay > index) return "text-gray-300";
+    else return "text-green-300 font-bold";
   };
 
   return (
