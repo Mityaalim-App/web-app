@@ -30,7 +30,6 @@ module.exports = {
         success: "#0CE871",
         warning: "#E8DF0C",
         error: "#E80C0C",
-        error: "#E80C0C",
       },
       fontFamily: {
         primary: ["var(--font-open-sans)"],
