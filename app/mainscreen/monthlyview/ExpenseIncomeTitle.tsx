@@ -13,9 +13,12 @@ export default function ExpenseIncomeTitle({
 }: IExpenseIncomeTitle) {
   return (
     <div className="flex items-center gap-x-1">
-      <p className="text-green-middle">{title}</p>
+      <p className="text-gray-400">{title}</p>
       <span className={`flex items-center ${style}`}>
-        <PageTitle className="text-xl font-bold">{amount + ""}</PageTitle>₪
+        <PageTitle className="font-bold">
+          {amount.toLocaleString() + ""}
+        </PageTitle>
+        ₪
       </span>
     </div>
   );
