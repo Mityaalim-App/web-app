@@ -30,6 +30,7 @@ export default function Button({
     const classes = [
       "w-full rounded-full flex items-center justify-center py-2 px-4",
       className,
+      className,
     ];
     if (disable) {
       classes.push(
@@ -64,7 +65,11 @@ export default function Button({
     <button className={buttonClasses()} onClick={onClick} disabled={disable}>
       {icon && (
         <span className="w-6 h-6 ml-1">
-          {" "}
+          <IconComponent />
+        </span>
+      )}
+      {icon && (
+        <span className="w-6 h-6 ml-1">
           <IconComponent />
         </span>
       )}
