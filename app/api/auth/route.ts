@@ -1,63 +1,53 @@
+import { User } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
 import { prisma } from "../../../prisma/client";
-import { User, UserDetails } from "@prisma/client";
 import { HttpStatusCode } from "axios";
 import { generateSmsCode, sendSms } from "../sms/route";
 
-interface IFullUser extends User, UserDetails {}
+/**
+ * Checks whether the verification code is expired (if it was generated more than 5 minutes ago)
+ */
+function isExpired(user: User) {
+  // Convert the dates to milliseconds
+  const time1 = Date.now();
+  const time2 = new Date(user.updatedAt).getTime();
 
-async function createUser(tempCode: number, phone: string) {
-  const user: Partial<User> = {
-    phoneNumber: phone,
-    verificationCode: tempCode
-  };
+  console.log({ time1 }, { time2 });
 
-  return await prisma.user.create({
-    data: user as any
-  });
-}
+  // Calculate the difference in milliseconds
+  const difference = Math.abs(time2 - time1);
 
-function createRedirectUrl(user: IFullUser, request: NextRequest) {
-  if (user.isVerified) {
-    return new URL("/home", request.url);
-  }
-  if (!user.email) {
-    return new URL("/personal-info", request.url);
-  }
-  if (!user.monthlySavings) {
-    return new URL("/monthly-savings", request.url);
-  }
-  if (!user.weeklyAlertDays) {
-    return new URL("/weekly-alerts", request.url);
-  }
+  // Convert the difference to minutes
+  const differenceInMinutes = difference / (1000 * 60);
 
-  return "";
+  console.log({ differenceInMinutes });
+
+  // Return whether the difference is more than 5 minutes
+  return differenceInMinutes > 5;
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { phone }: { phone: string } = body;
-
-  const dbUser = await prisma.user.findUnique({
-    where: {
-      phoneNumber: phone
-    }
-  });
+  const { code }: { code: string } = body;
 
   try {
-    const tempCode = generateSmsCode();
+    const user = await prisma.user.findUnique({
+      where: {
+        verificationCode: +code
+      }
+    });
 
-    const response = await sendSms(tempCode, phone);
-    const data = await response.json();
-    if (data.StatusId < 1) {
-      throw new Error("השליחה נכשלה, אנא וודא כי הכנסת את המספר הנכון");
+    if (user) {
+      if (!isExpired(user)) {
+        return NextResponse.json({ message: "success" });
+      } else {
+        throw new Error(
+          "פג תוקפו של הקוד, לחץ על ׳שלח שוב׳ בשביל לקבל קוד חדש"
+        );
+      }
+    } else {
+      throw new Error("המספר שהכנסת שגוי, אנא נסה שנית");
     }
-
-    if (!dbUser) {
-      await createUser(tempCode, phone);
-    }
-    return NextResponse.json({ message: "Success" });
   } catch (e: any) {
     return NextResponse.json(
       { error: e.message, status: HttpStatusCode.BadRequest },

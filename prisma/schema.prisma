@@ -10,28 +10,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id                Int       @id @default(autoincrement())
-  phoneNumber       String    @unique
-  verificationCode  Int?
-  isVerified        Boolean   @default(false)
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  userDetails       UserDetails?
+model Account {
+  id              Int             @id @default(autoincrement())
+  user            User[]
+  monthlySavings  Int?
+  isVerified      Boolean         @default(false)
+  marriageStatus  MarriageStatus?
+  kidsStatus      KidsStatus?
+  weeklyAlertDays Days[]
+  weeklyAlertHour Int?
 }
-model UserDetails {
-  id                 Int      @id @default(autoincrement())
-  name               String
-  email              String
-  marriageStatus     MarriageStatus
-  kidsStatus         KidsStatus
-  monthlySavings     Int?
-  weeklyAlertDays    Days[]
-  weeklyAlertHour    Int?
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId             Int      @unique
+
+model User {
+  id               Int      @id @default(autoincrement())
+  phoneNumber      String   @unique
+  verificationCode Int?     @unique
+  firstName        String?
+  lastName         String?
+  email            String?
+  dob              String?
+  account          Account  @relation(fields: [accountId], references: [id])
+  accountId        Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 enum Days {
