@@ -5,6 +5,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -34,7 +35,7 @@ module.exports = {
         primary: ["var(--font-open-sans)"],
       },
       boxShadow: {
-        main: " 0px 4px 24px rgba(0, 0, 0, 0.08)",
+        main: " 0px 2px 16px rgba(0, 0, 0, 0.1)",
       },
     },
   },
