@@ -23,3 +23,26 @@ export async function handleError(response: Response) {
 export function isClientSide() {
   return typeof window !== "undefined";
 }
+
+export function roundTime(date: Date) {
+  var roundedDate = new Date(date);
+
+  var hours = roundedDate.getHours();
+  var minutes = roundedDate.getMinutes();
+
+  // Round the minutes to the nearest 15 minutes
+  minutes = Math.round(minutes / 15) * 15;
+
+  // If the rounded minutes exceed 60, adjust the hours accordingly
+  if (minutes === 60) {
+    hours += 1;
+    minutes = 0;
+  }
+
+  // Set the rounded hours and minutes on the new date object
+  roundedDate.setHours(hours);
+  roundedDate.setMinutes(minutes);
+
+  // Return the rounded date object
+  return roundedDate;
+}

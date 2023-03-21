@@ -12,15 +12,11 @@ function isExpired(user: User) {
   const time1 = Date.now();
   const time2 = new Date(user.updatedAt).getTime();
 
-  console.log({ time1 }, { time2 });
-
   // Calculate the difference in milliseconds
   const difference = Math.abs(time2 - time1);
 
   // Convert the difference to minutes
   const differenceInMinutes = difference / (1000 * 60);
-
-  console.log({ differenceInMinutes });
 
   // Return whether the difference is more than 5 minutes
   return differenceInMinutes > 5;

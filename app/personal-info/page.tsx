@@ -13,10 +13,11 @@ import ProgressBar from "./ProgressBar";
 import { MarriageStatus, KidsStatus, User, Account } from "@prisma/client";
 import { kidsStatuses, marriageStatuses } from "./personaInfo.consts";
 import { useRouter } from "next/navigation";
-import { IStoreState, useMainStore } from "@/store";
 import { getLoggedUser } from "../utils/storage";
+import { handleError, isClientSide } from "../utils";
 
 export default function PersonalInfo() {
+  const router = useRouter();
   const loggedUser = getLoggedUser();
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -57,7 +58,11 @@ export default function PersonalInfo() {
       body: JSON.stringify({ user, account })
     });
 
-    console.log(await resp.json());
+    if (isClientSide() && resp.ok) {
+      router.replace("/savings-goal");
+    } else {
+      handleError(resp);
+    }
   };
 
   const isFormValid = () => {
