@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     /**
      * Update user with new verificationCode
      */
-    prisma.user.update({
+    await prisma.user.update({
       where: {
         phoneNumber: phone
       },

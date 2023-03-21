@@ -10,19 +10,24 @@ import BirthDateInput from "./BirthDateInput";
 import Pill, { IPillChildren } from "./Pill";
 import Button from "../components/Button";
 import ProgressBar from "./ProgressBar";
-import { MarriageStatus, KidsStatus } from "@prisma/client";
+import { MarriageStatus, KidsStatus, User, Account } from "@prisma/client";
 import { kidsStatuses, marriageStatuses } from "./personaInfo.consts";
 import { useRouter } from "next/navigation";
+import { IStoreState, useMainStore } from "@/store";
+import { getLoggedUser } from "../utils/storage";
 
 export default function PersonalInfo() {
-  const router = useRouter();
+  const loggedUser = getLoggedUser();
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [dob, setDob] = useState<string>("");
-  const [selectedMarriageStatus, setSelectedMarriageStatus] =
-    useState<string>("");
-  const [selectedKidsStatus, setSelectedKidsStatus] = useState<string>("");
+  const [selectedMarriageStatus, setSelectedMarriageStatus] = useState<
+    MarriageStatus | undefined
+  >(undefined);
+  const [selectedKidsStatus, setSelectedKidsStatus] = useState<
+    KidsStatus | undefined
+  >(undefined);
 
   const onPillClicked = (status: IPillChildren, isKidsStatus: boolean) => {
     if (isKidsStatus) {
@@ -32,9 +37,44 @@ export default function PersonalInfo() {
     }
   };
 
-  const handleSave = (e: any) => {
+  const handleSave = async (e: any) => {
     e.preventDefault();
-    router.push("/saving-goal");
+    const user: Partial<User> = {
+      id: loggedUser?.id,
+      email,
+      firstName,
+      lastName,
+      dob
+    };
+    const account: Partial<Account> = {
+      id: loggedUser?.account.id,
+      kidsStatus: selectedKidsStatus,
+      marriageStatus: selectedMarriageStatus
+    };
+
+    const resp = await fetch("/api/user", {
+      method: "POST",
+      body: JSON.stringify({ user, account })
+    });
+
+    console.log(await resp.json());
+  };
+
+  const isFormValid = () => {
+    return (
+      !!firstName &&
+      !!lastName &&
+      !!email &&
+      !!dob &&
+      !!selectedMarriageStatus &&
+      !!selectedKidsStatus &&
+      isEmailValid()
+    );
+  };
+
+  const isEmailValid = () => {
+    const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return !email || emailRegexp.test(email);
   };
 
   return (
@@ -62,6 +102,7 @@ export default function PersonalInfo() {
           name="email"
           placeholder="דוא”ל"
           icon={<AtSignIcon />}
+          error={isEmailValid() ? undefined : "האימייל אינו בפורמט נכון"}
           onChange={(e) => setEmail(e.target.value)}
         />
 
@@ -99,7 +140,7 @@ export default function PersonalInfo() {
             </Pill>
           ))}
         </div>
-        <Button className="mt-10" onClick={handleSave}>
+        <Button className="mt-10" onClick={handleSave} disable={!isFormValid()}>
           המשך
         </Button>
       </form>

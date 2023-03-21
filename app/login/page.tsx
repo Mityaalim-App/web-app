@@ -12,7 +12,8 @@ import {
 } from "react";
 import InputField from "../components/InputField";
 import { IStoreState, useMainStore } from "@/store";
-import { toast } from "react-toastify";
+import { setLoggedUser } from "../utils/storage";
+import { handleError } from "../utils";
 
 export default function Login() {
   const router = useRouter();
@@ -28,22 +29,17 @@ export default function Login() {
 
   const handleLogin = async (e: ReactMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const resp = await fetch("/api/auth", {
+    const resp = await fetch("/api/account", {
       method: "POST",
       body: JSON.stringify({ phone: phoneNumber })
     });
+    const newAccount = await resp.json();
 
     if (!resp.ok) {
-      const body = await resp.json();
-      toast.error(body.error);
-      return;
+      return handleError(resp);
     }
-
-    if (resp.redirected) {
-      sessionStorage.setItem("redirect", resp.url);
-    }
-
     setPhoneInStore(phoneNumber);
+    setLoggedUser(newAccount);
     router.replace("/auth");
   };
 
