@@ -1,12 +1,13 @@
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import ClockIcon from "../../public/images/clock.svg";
+import { roundTime } from "../utils";
 
 interface IDatePickerProps {
   onChange: (date: Date) => void;
 }
 export default function DatePicker({ onChange }: IDatePickerProps) {
-  const [time, setTime] = useState<Date | null>(new Date());
+  const [time, setTime] = useState<Date>(roundTime(new Date()));
 
   const handleOnChange = (date: Date) => {
     setTime(date);

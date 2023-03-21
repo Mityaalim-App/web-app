@@ -43,7 +43,7 @@ export default function Approve() {
         router.replace("/savings-goal");
       } else {
         //the user did not fill the notifications info
-        router.replace("/notifications");
+        router.replace("/notification");
       }
     }
   };

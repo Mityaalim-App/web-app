@@ -6,8 +6,13 @@ import ProgressBar from "../personal-info/ProgressBar";
 import NisIcon from "../../public/images/nis.svg";
 import Button from "../components/Button";
 import { ChangeEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { handleError, isClientSide } from "../utils";
+import { getLoggedUser, setLoggedUser } from "../utils/storage";
 
 export default function SavingGoal() {
+  const router = useRouter();
+  const loggedUser = getLoggedUser();
   const [goal, setGoal] = useState<number>();
 
   const handleGoalChanged = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +25,27 @@ export default function SavingGoal() {
     }
     setGoal(+value);
   };
+
+  const handleSave = async () => {
+    const resp = await fetch("/api/savings", {
+      method: "POST",
+      body: JSON.stringify({ goal, accountId: loggedUser?.account.id })
+    });
+
+    if (resp.ok) {
+      setLoggedUser({
+        ...loggedUser!,
+        account: {
+          ...loggedUser!.account,
+          monthlySavings: goal as number
+        }
+      });
+      router.replace("/notification");
+    } else {
+      handleError(resp);
+    }
+  };
+
   return (
     <div className="py-10 px-9">
       <ProgressBar step={2} />
@@ -40,7 +66,7 @@ export default function SavingGoal() {
         onChange={handleGoalChanged}
       />
 
-      <Button className="mt-16" href="/notification">
+      <Button className="mt-16" onClick={handleSave} disable={!goal}>
         המשך
       </Button>
     </div>

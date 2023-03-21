@@ -10,6 +10,7 @@ import ProgressBar from "../personal-info/ProgressBar";
 import Button from "../components/Button";
 import Pill, { IPillChildren } from "../personal-info/Pill";
 import DatePicker from "../components/DatePicker";
+import { roundTime } from "../utils";
 
 const days: IPillChildren[] = [
   { label: "ראשון", value: Days.SUNDAY },
@@ -23,7 +24,7 @@ const days: IPillChildren[] = [
 
 export default function WeeklyNotification() {
   const [selectedDays, setSelectedDays] = useState<Days[]>([]);
-  const [time, setTime] = useState<Date | null>(new Date());
+  const [time, setTime] = useState<Date | null>(null);
 
   const handleDaySelected = (day: IPillChildren) => {
     if (selectedDays.includes(day.value)) {
