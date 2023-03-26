@@ -1,8 +1,15 @@
+/**
+ * This file is in charge of checking whether the code the user entered is valid or not
+ * A code is considered invalid in 2 cases:
+ *
+ * 1. The code does not exist in the DB
+ * 2. The code is more than 5 minutes old
+ */
+
 import { User } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../prisma/client";
 import { HttpStatusCode } from "axios";
-import { generateSmsCode, sendSms } from "../sms/route";
 
 /**
  * Checks whether the verification code is expired (if it was generated more than 5 minutes ago)

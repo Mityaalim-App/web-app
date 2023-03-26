@@ -1,3 +1,7 @@
+/**
+ * This file is in charge of creating an account and logging in
+ */
+
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../prisma/client";
 import { HttpStatusCode } from "axios";
@@ -34,7 +38,7 @@ async function getUser(phone: string) {
 }
 
 /**
- * Handles *login / account creation* process
+ * Handles **login / account creation** process
  */
 export async function POST(request: NextRequest) {
   const body = await request.json();

@@ -18,7 +18,7 @@ model Account {
   marriageStatus  MarriageStatus?
   kidsStatus      KidsStatus?
   weeklyAlertDays Days[]
-  weeklyAlertHour Int?
+  weeklyAlertHour DateTime?
 }
 
 model User {

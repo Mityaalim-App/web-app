@@ -1,3 +1,7 @@
+/**
+ * This file is in charge of updating user profile
+ */
+
 import { NextRequest, NextResponse } from "next/server";
 import { HttpStatusCode } from "axios";
 import { prisma } from "@/prisma/client";
