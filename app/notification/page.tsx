@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Days } from "@prisma/client";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -11,6 +11,7 @@ import Button from "../components/Button";
 import Pill, { IPillChildren } from "../personal-info/Pill";
 import DatePicker from "../components/DatePicker";
 import { roundTime } from "../utils";
+import { useRouter } from "next/navigation";
 
 const days: IPillChildren[] = [
   { label: "ראשון", value: Days.SUNDAY },
@@ -23,14 +24,33 @@ const days: IPillChildren[] = [
 ];
 
 export default function WeeklyNotification() {
+  const router = useRouter();
   const [selectedDays, setSelectedDays] = useState<Days[]>([]);
-  const [time, setTime] = useState<Date | null>(null);
+  const [time, setTime] = useState<Date | null>(roundTime(new Date()));
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
   const handleDaySelected = (day: IPillChildren) => {
     if (selectedDays.includes(day.value)) {
+      // if the day already exists, remove it
       setSelectedDays(selectedDays.filter((item) => item !== day.value));
     } else {
+      // add the newly selected day
       setSelectedDays([...selectedDays, day.value]);
+    }
+  };
+
+  useEffect(() => {
+    setIsFormValid(!!selectedDays.length && !!time);
+  }, [selectedDays, time]);
+
+  const handleSave = async () => {
+    const resp = await fetch("/api/notifications", {
+      method: "POST",
+      body: JSON.stringify({ time, selectedDays })
+    });
+
+    if (resp.ok) {
+      router.replace("/home");
     }
   };
 
@@ -59,7 +79,7 @@ export default function WeeklyNotification() {
 
       <h3 className="font-bold mt-8">באיזו שעה?</h3>
       <DatePicker onChange={setTime} />
-      <Button className="mt-16" href="/notification">
+      <Button className="mt-16" onClick={handleSave} disable={!isFormValid}>
         המשך
       </Button>
     </div>

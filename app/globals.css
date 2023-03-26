@@ -8,7 +8,7 @@
 
 .react-datepicker--time-only,
 .react-datepicker__time-container {
-  @apply w-full;
+  width: 100% !important;
 }
 
 .react-datepicker__triangle {
