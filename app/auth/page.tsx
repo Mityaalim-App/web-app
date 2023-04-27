@@ -22,7 +22,7 @@ export default function Approve() {
   const handleResend = async () => {
     const resp = await fetch("/api/sms", {
       method: "POST",
-      body: JSON.stringify({ phone: loggedUser?.phoneNumber })
+      body: JSON.stringify({ phone: loggedUser?.phoneNumber }),
     });
 
     if (!resp.ok) {
@@ -51,7 +51,7 @@ export default function Approve() {
   const verifyNumber = async () => {
     const resp = await fetch("/api/auth", {
       method: "POST",
-      body: JSON.stringify({ code })
+      body: JSON.stringify({ code }),
     });
 
     if (resp.ok) {
@@ -84,7 +84,7 @@ export default function Approve() {
               character:
                 "rounded-full w-12 h-20 border border-green-100 flex items-center justify-center text-black",
               characterInactive: "bg-white",
-              characterSelected: "outline-none border-green-300"
+              characterSelected: "outline-none border-green-300",
             }}
             onChange={setCode}
           />
