@@ -1,3 +1,4 @@
+import { NextRequest } from "next/server";
 import { toast } from "react-toastify";
 
 export function formatPhoneNumber(phoneNumber: string | undefined) {
@@ -17,6 +18,8 @@ export function showErrorMessage(message: string) {
 }
 export async function handleError(response: Response) {
   const { error } = await response.json();
+  console.error(error);
+
   showErrorMessage(error);
 }
 
@@ -45,4 +48,11 @@ export function roundTime(date: Date) {
 
   // Return the rounded date object
   return roundedDate;
+}
+
+export function getAccountId(request: NextRequest) {
+  return request.headers.get("x-account-id")!;
+}
+export function getUserId(request: NextRequest) {
+  return request.headers.get("x-user-id")!;
 }

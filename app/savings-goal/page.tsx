@@ -29,7 +29,7 @@ export default function SavingGoal() {
   const handleSave = async () => {
     const resp = await fetch("/api/savings", {
       method: "POST",
-      body: JSON.stringify({ goal, accountId: loggedUser?.account.id })
+      body: JSON.stringify({ goal })
     });
 
     if (resp.ok) {

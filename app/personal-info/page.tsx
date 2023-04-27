@@ -41,21 +41,21 @@ export default function PersonalInfo() {
   const handleSave = async (e: any) => {
     e.preventDefault();
     const user: Partial<User> = {
-      id: loggedUser?.id,
+      id: loggedUser ? loggedUser.id + "" : undefined,
       email,
       firstName,
       lastName,
-      dob
+      dob,
     };
     const account: Partial<Account> = {
       id: loggedUser?.account.id,
       kidsStatus: selectedKidsStatus,
-      marriageStatus: selectedMarriageStatus
+      marriageStatus: selectedMarriageStatus,
     };
 
     const resp = await fetch("/api/user", {
       method: "POST",
-      body: JSON.stringify({ user, account })
+      body: JSON.stringify({ user, account }),
     });
 
     if (isClientSide() && resp.ok) {
