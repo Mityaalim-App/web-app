@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
 import { HttpStatusCode } from "axios";
 import { prisma } from "@/prisma/client";
 

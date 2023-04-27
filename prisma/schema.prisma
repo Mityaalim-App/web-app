@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Account {
-  id              Int             @id @default(autoincrement())
+  id              String          @id @default(uuid())
   user            User[]
   monthlySavings  Int?
   isVerified      Boolean         @default(false)
@@ -22,7 +22,7 @@ model Account {
 }
 
 model User {
-  id               Int      @id @default(autoincrement())
+  id               String   @id @default(uuid())
   phoneNumber      String   @unique
   verificationCode Int?     @unique
   firstName        String?
@@ -30,7 +30,7 @@ model User {
   email            String?
   dob              String?
   account          Account  @relation(fields: [accountId], references: [id])
-  accountId        Int
+  accountId        String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }

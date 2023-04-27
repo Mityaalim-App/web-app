@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../prisma/client";
 import { HttpStatusCode } from "axios";
 import { generateSmsCode, sendSms } from "../sms/route";
+import { generateJWT } from "@/app/utils/jwt";
 
 async function createAccount(tempCode: number, phone: string) {
   return await prisma.account.create({
@@ -14,26 +15,26 @@ async function createAccount(tempCode: number, phone: string) {
         create: [
           {
             phoneNumber: phone,
-            verificationCode: tempCode
-          }
-        ]
-      }
-    }
+            verificationCode: tempCode,
+          },
+        ],
+      },
+    },
   });
 }
 
 async function getUser(phone: string) {
   return await prisma.user.findUnique({
     where: {
-      phoneNumber: phone
+      phoneNumber: phone,
     },
     select: {
       id: true,
       phoneNumber: true,
       firstName: true,
       lastName: true,
-      account: true
-    }
+      account: true,
+    },
   });
 }
 
@@ -42,10 +43,10 @@ async function getUser(phone: string) {
  */
 export async function POST(request: NextRequest) {
   const body = await request.json();
+
   const { phone }: { phone: string } = body;
 
   try {
-    let account = null;
     const tempCode = generateSmsCode();
 
     let dbUser = await getUser(phone);
@@ -57,25 +58,30 @@ export async function POST(request: NextRequest) {
     }
 
     if (!dbUser) {
-      account = await createAccount(tempCode, phone);
+      await createAccount(tempCode, phone);
       dbUser = await getUser(phone);
-      return NextResponse.json({ ...dbUser });
+      const resp = NextResponse.json({ ...dbUser });
+      resp.cookies.set("token", await generateJWT(dbUser));
+      return resp;
     }
 
     await prisma.user.update({
       where: {
-        id: dbUser.id
+        id: dbUser.id,
       },
       data: {
-        verificationCode: tempCode
-      }
+        verificationCode: tempCode,
+      },
     });
 
-    return NextResponse.json({ ...dbUser });
+    const resp = NextResponse.json({ ...dbUser });
+
+    resp.cookies.set("token", await generateJWT(dbUser));
+    return resp;
   } catch (e: any) {
     return NextResponse.json(
-      { error: e.message, status: HttpStatusCode.BadRequest },
-      { status: HttpStatusCode.BadRequest }
+      { error: e.message, status: HttpStatusCode.InternalServerError },
+      { status: HttpStatusCode.InternalServerError }
     );
   }
 }
