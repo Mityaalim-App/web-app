@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import Button from "../components/Button";
 import PageTitle from "../components/PageTitle";
 import CellIcon from "public/images/cellphone.svg";
@@ -65,6 +64,7 @@ export default function Login() {
           placeholder="טלפון נייד"
           icon={<CellIcon />}
           onChange={handleOnChange}
+          className='flex w-[290px] h-14 justify-center items-center shrink-0 px-2 py-0'
         />
       </div>
       <Button disable={!isPhoneValid()} onClick={handleLogin}>
