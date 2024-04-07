@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MaleAndFemaleMityaalim from "public/images/male-and-female-mityaalim.svg";
 import CloudIcon from "public/images/cloud.svg";
 
@@ -12,8 +12,18 @@ interface IUser {
 
 export default function HeroComp() {
   const [currDate, setCurrDate] = useState(new Date().toLocaleDateString());
+  const [accountDetails, setAccountDetails] = useState< any | null >();
+
+  useEffect(() => { 
+    const getAccount = async () => {
+      const res = await fetch("/api/account", { method: "GET" }).then(r => r.json());
+      setAccountDetails(res);
+    }
+    getAccount();
+  }, []);
+  
   const user: IUser = {
-    name: "אלעד ומאיה",
+    name: accountDetails?.firstName,
     saved: 24563,
     score: 2500,
   };
