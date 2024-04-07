@@ -43,9 +43,8 @@ async function getUser(phone: string) {
  * Handles **login / account creation** process
  */
 export async function POST(request: NextRequest) {
-  
   const body = await request.json();
-  debugger
+  
   const { phone }: { phone: string } = body;
 
   try {
