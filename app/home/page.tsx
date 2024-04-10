@@ -1,6 +1,7 @@
 import HeroComp from "./components/HeroComp";
 import HeaderComp from "../components/HeaderComp";
 import WeeklyView from "./weeklyview/WeeklyView";
+import DailyView from "./dailyview/DailyView";
 
 export default function MainScreen() {
   return (
@@ -9,6 +10,7 @@ export default function MainScreen() {
         <HeaderComp />
         <HeroComp />
       </div>
+      <DailyView />
       <WeeklyView />
     </section>
   );
