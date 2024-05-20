@@ -7,7 +7,6 @@ import { prisma } from "../../../prisma/client";
 import { HttpStatusCode } from "axios";
 import { generateSmsCode, sendSms } from "../sms/route";
 import { generateJWT } from "@/app/utils/jwt";
-import { getAccountId } from "@/app/utils";
 
 async function createAccount(tempCode: number, phone: string) {
   return await prisma.account.create({
@@ -85,22 +84,4 @@ export async function POST(request: NextRequest) {
       { status: HttpStatusCode.InternalServerError }
     );
   }
-}
-
-async function getAcountDetails(accountId: string) {
-  const details = await prisma.user.findFirst({
-    where: {
-      accountId: accountId,
-    }, 
-    select: {
-      firstName: true,      
-    },
-  });
-  return details;
-}
-
-export async function GET(request: NextRequest) {
-  const accountId = getAccountId(request);
-  let accountDetails = await getAcountDetails(accountId);
-  return NextResponse.json( accountDetails);//.firstName );
 }

@@ -6,6 +6,30 @@ import { NextRequest, NextResponse } from "next/server";
 import { HttpStatusCode } from "axios";
 import { prisma } from "@/prisma/client";
 import { User, Account } from "@prisma/client";
+import { getUserId } from "@/app/utils";
+
+async function getUser(id: string) {
+  return await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+    select: {
+      id: true,
+      phoneNumber: true,
+      firstName: true,
+      lastName: true,
+      account: true,
+    },
+  });
+}
+
+export const GET = async (request: NextRequest) => {
+  console.log("GET....");
+  const userId = getUserId(request);
+  console.log("USER-ID: 2...",userId)
+  let userDetails = await getUser(userId);
+  return NextResponse.json( userDetails );//.firstName );
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
