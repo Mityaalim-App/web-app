@@ -12,18 +12,18 @@ interface IUser {
 
 export default function HeroComp() {
   const [currDate, setCurrDate] = useState(new Date().toLocaleDateString());
-  const [accountDetails, setAccountDetails] = useState< any | null >();
+  const [userDetails, setUserDetails] = useState< any | null >();
 
   useEffect(() => { 
-    const getAccount = async () => {
-      const res = await fetch("/api/account", { method: "GET" }).then(r => r.json());
-      setAccountDetails(res);
+    const getUser = async () => {
+      const res = await fetch("/api/user", { method: "GET" }).then(r => r.json());
+      setUserDetails(res);
     }
-    getAccount();
+    getUser();
   }, []);
   
   const user: IUser = {
-    name: accountDetails?.firstName,
+    name: userDetails?.firstName,
     saved: 24563,
     score: 2500,
   };
