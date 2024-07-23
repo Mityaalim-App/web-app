@@ -4,6 +4,7 @@ import HeroComp from "./components/HeroComp";
 import HeaderComp from "../components/HeaderComp";
 import WeeklyView from "./weeklyview/WeeklyView";
 import DailyView from "./dailyview/DailyView";
+import MonthlyView from "./monthlyview/MonthlyView";
 import { getLoggedUser } from "../utils/storage";
 
 export default function MainScreen() {
@@ -18,6 +19,7 @@ export default function MainScreen() {
       </div>
       <DailyView />
       <WeeklyView />
+      <MonthlyView />
     </section>
   );
 }
