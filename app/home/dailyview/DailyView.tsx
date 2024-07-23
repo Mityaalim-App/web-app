@@ -14,30 +14,30 @@ interface ITasks {
     onClick: MouseEventHandler
   }
   
-  export default function DailyView() {
-    const onTaskClick : MouseEventHandler<HTMLElement> = (event) => {
+export default function DailyView() {
+  const onTaskClick : MouseEventHandler<HTMLElement> = (event) => {
 
-    }
+  }
 
-    const tasks: ITasks[] = [
-      {
-        title: "הוצאה",
-        icon: <ExspenseIcon />,
-        onClick: onTaskClick,
-      },
-      {
-        title: "ללא תנועה",
-        icon: <MotionlessIcon />,
-        onClick: onTaskClick,
-      },
-      {
-        title: "הכנסה",
-        icon: <IncomeIcon />,
-        onClick: onTaskClick,
-      },
-    ];
+  const tasks: ITasks[] = [
+    {
+      title: "הוצאה",
+      icon: <ExspenseIcon />,
+      onClick: onTaskClick,
+    },
+    {
+      title: "ללא תנועה",
+      icon: <MotionlessIcon />,
+      onClick: onTaskClick,
+    },
+    {
+      title: "הכנסה",
+      icon: <IncomeIcon />,
+      onClick: onTaskClick,     
+    },
+  ];
 
-    return (
+  return (
         <section className="flex flex-col gap-y-4 bg-white px-4 pb-5 mx-4 rounded-xl">
             <ViewTitle
                 title="דיווח יומי"
