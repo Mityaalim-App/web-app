@@ -25,6 +25,22 @@ module.exports = {
         orange: {
           primary: "#EC7B29"
         },
+        dawn: {
+          bg: "#FBF6F2",
+          surface: "#FFFFFF",
+          primary: "#F0805A",
+          "primary-strong": "#E96A44",
+          "primary-soft": "#FCE7DD",
+          lavender: "#B7A6E4",
+          "lavender-soft": "#ECE6FA",
+          teal: "#57C2B0",
+          "teal-soft": "#DCF3EF",
+          pink: "#F2A9C0",
+          "pink-soft": "#FBE4EC",
+          ink: "#3E3A4D",
+          muted: "#918C9C",
+          line: "#F0E7E0"
+        },
         info: "#0CB3E8",
         success: "#0CE871",
         warning: "#E8DF0C",
