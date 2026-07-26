@@ -39,5 +39,5 @@ export async function middleware(request: NextRequest) {
 
 //regexp that matches all url's that start with / but exclude /login
 export const config = {
-  matcher: "/((?!login|dawn|api/account|_next/static|_next/images|favicon.ico).*)",
+  matcher: "/((?!login|dawn|images|api/account|_next/static|_next/images|favicon.ico).*)",
 };
